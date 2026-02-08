@@ -13,6 +13,7 @@ wheels/
 .env
 .env.*
 Gemini_api_key.txt
+.python-version
 
 # Jupyter
 .ipynb_checkpoints/

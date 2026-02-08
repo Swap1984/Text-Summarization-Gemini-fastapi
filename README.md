@@ -30,7 +30,7 @@ $env:GEMINI_API_KEY="YOUR_API_KEY_HERE"
 
 ## Running the API
 ```powershell
-uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ## API Usage
@@ -58,9 +58,9 @@ In Swagger UI, use the request body Content-Type dropdown to select `text/plain`
 {
   "summary": "Short summary text here.",
   "meta": {
-    "model": "gemini-1.5-flash",
+    "model": "gemini-2.5-flash-lite",
     "max_words": 120,
-    "style": "concise"
+    "style": "concise",`r`n    "mock": false
   }
 }
 ```
@@ -68,7 +68,7 @@ In Swagger UI, use the request body Content-Type dropdown to select `text/plain`
 ### Important: Content-Type Must Match
 If you use JSON, set header `Content-Type: application/json` and send valid JSON.
 If you use raw text, set `Content-Type: text/plain`.
-If the content type and body don’t match, you’ll get a `422 Unprocessable Entity` error.
+If the content type and body don't match, you'll get a `422 Unprocessable Entity` error.
 
 ### Example (text/plain)
 ```bash
@@ -79,7 +79,7 @@ curl -X POST "http://localhost:8000/summarize?style=numbered%20list&max_words=80
 
 ## Preprocessing (Why and What We Do)
 Preprocessing helps reduce noise and improves summary quality, especially for scraped or messy text.
-Current preprocessing in `app.py`:
+Current preprocessing in `app/main.py`:
 - Replace URLs with `[URL]` to reduce distraction and token usage.
 - Normalize whitespace (collapse multiple spaces/newlines).
 
@@ -92,9 +92,9 @@ These parameters control how deterministic or diverse the summary is:
 - `top_k`: limits candidate tokens; lower = more deterministic.
 
 Recommended starting points for summarization:
-- `temperature`: 0.2–0.4
-- `top_p`: 0.7–0.9
-- `top_k`: 20–64
+- `temperature`: 0.2-0.4
+- `top_p`: 0.7-0.9
+- `top_k`: 20-64
 
 ## Styles (Dropdown in API Docs)
 The API exposes a fixed set of styles via an enum, shown as a dropdown in the FastAPI docs UI:
@@ -110,8 +110,9 @@ The API exposes a fixed set of styles via an enum, shown as a dropdown in the Fa
 - `tl;dr`
 
 ## Deliverables
-- `app.py` (FastAPI application)
+- `app/main.py` (FastAPI application)
 - `requirements.txt` (dependencies)
 - `README.md` (this file)
 - `DOCUMENTATION.md` (detailed documentation)
-- `architecture_diagram.mmd` (technical architecture diagram)
+- `architecture_diagram.mmd` (technical architecture diagram)`r`n- `notebooks/Text_Summarisation_fastapi.ipynb` (notebook)
+

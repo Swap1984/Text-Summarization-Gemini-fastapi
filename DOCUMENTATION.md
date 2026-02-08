@@ -36,7 +36,7 @@ Optional: you can create a `.env` file and load it via `python-dotenv` in your r
 
 ## Running the API
 ```powershell
-uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ## API Usage
@@ -64,9 +64,9 @@ In Swagger UI, use the request body Content-Type dropdown to select `text/plain`
 {
   "summary": "Short summary text here.",
   "meta": {
-    "model": "gemini-1.5-flash",
+    "model": "gemini-2.5-flash-lite",
     "max_words": 120,
-    "style": "concise"
+    "style": "concise",`r`n    "mock": false
   }
 }
 ```
@@ -74,7 +74,7 @@ In Swagger UI, use the request body Content-Type dropdown to select `text/plain`
 ### Important: Content-Type Must Match
 If you use JSON, set header `Content-Type: application/json` and send valid JSON.
 If you use raw text, set `Content-Type: text/plain`.
-If the content type and body don’t match, you’ll get a `422 Unprocessable Entity` error.
+If the content type and body don't match, you'll get a `422 Unprocessable Entity` error.
 
 ### Example cURL
 ```bash
@@ -98,7 +98,8 @@ curl -X POST "http://localhost:8000/summarize?style=numbered%20list&max_words=80
 See the architecture diagram in `architecture_diagram.mmd`.
 
 ## Deliverables
-- `app.py` (FastAPI application)
+- `app/main.py` (FastAPI application)
 - `requirements.txt` (dependencies)
 - `DOCUMENTATION.md` (this file)
-- `architecture_diagram.mmd` (technical architecture diagram)
+- `architecture_diagram.mmd` (technical architecture diagram)`r`n- `notebooks/Text_Summarisation_fastapi.ipynb` (notebook)
+

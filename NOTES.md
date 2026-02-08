@@ -25,7 +25,7 @@
 - `tl;dr`
 
 ## Model
-- Current model in `app.py`: `gemini-2.5-flash-lite`
+- Current model in `app/main.py`: `gemini-2.5-flash-lite`
 
 ## Common Errors
 - `422 Unprocessable Entity` usually means invalid JSON or mismatched Content-Type.
@@ -33,7 +33,7 @@
 
 ## Run Command (CMD)
 ```bat
-uvicorn app:app --host 127.0.0.1 --port 8080
+uvicorn app.main:app --host 127.0.0.1 --port 8080
 ```
 
 ## Mock Mode (Local Only)
@@ -41,10 +41,10 @@ uvicorn app:app --host 127.0.0.1 --port 8080
 - Example (CMD):
 ```bat
 set MOCK_SUMMARY=1
-uvicorn app:app --host 127.0.0.1 --port 8080
+uvicorn app.main:app --host 127.0.0.1 --port 8080
 ```
 - Disable: `set MOCK_SUMMARY=`
-- Do not commit this change if you don’t want mock mode in GitHub.
+- Do not commit this change if you don't want mock mode in GitHub.
 
 ## Problems Faced + Fixes Applied
 - Swagger UI not opening at `0.0.0.0`: use `http://127.0.0.1:PORT/docs`.
@@ -53,3 +53,4 @@ uvicorn app:app --host 127.0.0.1 --port 8080
 - 422 errors in Swagger: JSON invalid or Content-Type mismatch.
 - Multi-line messy text broke JSON: added `text/plain` support in `/summarize`.
 - Docs confusion: added explicit Content-Type notes in Swagger, README, DOCUMENTATION.
+
