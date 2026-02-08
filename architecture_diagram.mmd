@@ -1,0 +1,14 @@
+flowchart LR
+  client[Client / User] --> api[FastAPI App]
+  api --> validate[Request Validation]
+  validate --> prompt[Prompt Builder]
+  prompt --> gemini[Gemini LLM API]
+  gemini --> response[Summary Response]
+  response --> api
+  api --> client
+
+  subgraph runtime[Runtime Environment]
+    api
+    validate
+    prompt
+  end
